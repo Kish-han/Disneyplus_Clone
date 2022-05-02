@@ -7,7 +7,6 @@ const Loginpg = () => {
     <div>
       <Navbar />
       <Login />
-
     </div>
   )
 }

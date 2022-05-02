@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Navbar = () => {
 
-    const user = false;
+    const user = true;
 
     return (
         <Container>
@@ -59,7 +59,7 @@ export default Navbar
 const Container = styled.div`
     background-color: black;
     height: 9vh;
-    width: 100vw;
+    width: 100%;
     padding: 0px 10px;
     display: flex;
     align-items: center;
@@ -82,6 +82,10 @@ const LoggedIn = styled.div`
 `
 const NavMenu = styled.nav`
     display: flex;
+
+    @media (max-width: 800px){
+        display: none;
+    }
 `
 const Link = styled.div`
     display: flex;
@@ -102,7 +106,10 @@ const Link = styled.div`
 
 const Profile = styled.div`
     height: 50px;
-    margin-right: 30px;   
+    margin-right: 15px;   
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
     img{
         height: 95%;
         border-radius: 50px;    
