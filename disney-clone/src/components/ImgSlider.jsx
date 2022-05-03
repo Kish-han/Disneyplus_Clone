@@ -72,10 +72,10 @@ export default ImgSlider;
       overflow: initial;
     }
     .slick-prev {
-      left: -75px;
+      left: 10px;
     }
     .slick-next {
-      right: -75px;
+      right: 10px;
     }
   `;
   

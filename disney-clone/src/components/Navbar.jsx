@@ -82,16 +82,17 @@ const LoggedIn = styled.div`
 `
 const NavMenu = styled.nav`
     display: flex;
-
     @media (max-width: 800px){
         display: none;
     }
+
 `
 const Link = styled.div`
     display: flex;
     align-items: center;
     margin-right: 25px;
     flex: 1;
+    cursor: pointer;
     img{
         height: 22px;
         margin-right: 5px;
@@ -101,7 +102,29 @@ const Link = styled.div`
         letter-spacing: 1.5px;
         font-size: 14px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: relative;
+        
+        &::after{
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            content: "";
+            background-color: white;
+            border-radius: 0px 0px 4px 4px;
+            height: 2px;
+            width: 100%;
+            transform-origin: left center;
+            transform: scaleX(0);
+            transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+        }
     }
+
+    &:hover{
+        p::after{
+            transform: scaleX(1);
+        }
+    }
+    
 `
 
 const Profile = styled.div`
