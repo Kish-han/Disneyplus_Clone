@@ -7,11 +7,11 @@ import ProductionHover from '../components/ProductionHover'
 
 const Homepg = () => {
   return (
-      <Container>
+    <Container>
       <Navbar />
       <ImgSlider />
       <ProductionHover />
-      </Container>
+    </Container>
   )
 }
 
