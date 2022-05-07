@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import SignupOptions from './SignupOptions';
 
 const SigninOptions = () => {
-    return (
-        <Container>
-            <Wrap>
-                <h1>Sign In</h1>
-                <input type="text" placeholder='Email Or PhoneNumber' />
-                <input type="password" placeholder='Password' />
-                <Button>Login</Button>
-                <p>Or</p>
-                <GoogleBtn>Continue with google</GoogleBtn>
-                <Signup>New to Disneyplus ? <span>Sign up now</span></Signup>
-            </Wrap>
-        </Container>
 
+    const [signUp, setSignUp] = useState(false);
+
+
+    return (
+        <>
+            {!signUp ? (
+                <Container>
+                    <Wrap>
+                        <h1>Sign In</h1>
+                        <input type="text" placeholder='Email Or PhoneNumber' />
+                        <input type="password" placeholder='Password' />
+                        <Button>Login</Button>
+                        <p>Or</p>
+                        <GoogleBtn>Continue with google</GoogleBtn>
+                        <Signup>New to Disneyplus ? <span onClick={() => setSignUp(true)}>Sign up now</span></Signup>
+                    </Wrap>
+                </Container>
+
+            ) : (
+                <SignupOptions />
+            )}
+        </>
     )
 }
 
