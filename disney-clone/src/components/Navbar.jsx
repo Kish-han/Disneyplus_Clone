@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { auth } from '../firebase'
 
 const Navbar = () => {
 
@@ -35,7 +36,7 @@ const Navbar = () => {
                 </Link>
             </NavMenu>
             <Profile>
-                <img src="https://imgs.search.brave.com/M5ytj7a9K0w4JXlzrruFpLU1tUUgua2eyNm609y0E28/rs:fit:1080:1122:1/g:ce/aHR0cHM6Ly9iZXN0/cHJvZmlsZXBpY3R1/cmVzLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMS8wNC9D/b29sLVByb2ZpbGUt/UGljdHVyZS5qcGc" alt="" />
+                <img onClick={()=> auth.signOut()} src="https://imgs.search.brave.com/M5ytj7a9K0w4JXlzrruFpLU1tUUgua2eyNm609y0E28/rs:fit:1080:1122:1/g:ce/aHR0cHM6Ly9iZXN0/cHJvZmlsZXBpY3R1/cmVzLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMS8wNC9D/b29sLVByb2ZpbGUt/UGljdHVyZS5qcGc" alt="" />                
             </Profile>
         </Container>
     )
@@ -119,6 +120,7 @@ const Profile = styled.div`
     img{
         height: 95%;
         border-radius: 50px;    
+        cursor: pointer;
     }
 `
 

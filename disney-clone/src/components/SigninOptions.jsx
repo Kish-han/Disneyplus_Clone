@@ -1,23 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import SignupOptions from './SignupOptions';
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, provider } from '../firebase';
 
 const SigninOptions = () => {
 
     const [signUp, setSignUp] = useState(false);
 
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
 
+    const signIn = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(
+            auth,
+            emailRef.current.value,
+            passwordRef.current.value
+        ).then((authUser) => {
+            console.log(authUser)
+        }).catch((error) => {
+            alert(error.message)
+        })
+    }
+
+    const popup = (e) => {
+        e.preventDefault();
+        signInWithPopup(
+            auth,
+            provider
+        ).then((authUser) => {
+            console.log(authUser)
+        }).catch((error) => {
+            alert(error.message)
+        })
+    }
     return (
         <>
             {!signUp ? (
                 <Container>
                     <Wrap>
                         <h1>Sign In</h1>
-                        <input type="text" placeholder='Email Or PhoneNumber' />
-                        <input type="password" placeholder='Password' />
-                        <Button>Login</Button>
+                        <input ref={emailRef} type="text" placeholder='Email Or PhoneNumber' />
+                        <input ref={passwordRef} type="password" placeholder='Password' />
+                        <Button onClick={signIn}>Login</Button>
                         <p>Or</p>
-                        <GoogleBtn>Continue with google</GoogleBtn>
+                        <GoogleBtn onClick={ popup }>Continue with google</GoogleBtn>
                         <Signup>New to Disneyplus ? <span onClick={() => setSignUp(true)}>Sign up now</span></Signup>
                     </Wrap>
                 </Container>

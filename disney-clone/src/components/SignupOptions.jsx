@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignupOptions = () => {
+
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const register = (e) => {
+        e.preventDefault();
+        createUserWithEmailAndPassword(
+            auth,
+            emailRef.current.value,
+            passwordRef.current.value
+        ).then((authUser) => {
+            console.log(authUser)
+         })
+            .catch((error) => {
+                alert(error.message)
+            });
+    }
+
     return (
         <Container>
             <Wrap>
                 <h1>Sign Up</h1>
-                <input type="text" placeholder='Email Or PhoneNumber' />
-                <input type="password" placeholder='Password' />
-                <Button>SignUp</Button>
+                <input ref={emailRef} type="text" placeholder='Email Or PhoneNumber' />
+                <input ref={passwordRef} type="password" placeholder='Password' />
+                <Button onClick={register}>SignUp</Button>
             </Wrap>
         </Container>
     )

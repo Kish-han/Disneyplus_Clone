@@ -1,11 +1,16 @@
-// import { async } from '@firebase/util';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from '../axios'
+import { useNavigate } from "react-router-dom";
 
 const Row = ({ title, fetchUrl }) => {
 
     const base_url = "https://image.tmdb.org/t/p/original"
+    const navigate = useNavigate();
+
+    const truncate = (string, n) => {
+        return string?.length > n ? string.substr(0, n-1) + '...' : string
+    }
 
     const [movies, setMovies] = useState([]);
 
@@ -27,11 +32,18 @@ const Row = ({ title, fetchUrl }) => {
                 {movies.map(movie => (
                     (movie.backdrop_path &&
                         <Holder>
-                            <img
-                                key={movie.id}
-                                src={`
-                        ${base_url}${movie.backdrop_path}
-                        `} alt={movie.name} />
+                            <ImageBox>
+                                <img
+                                    onClick={()=>navigate('/details')}
+                                    key={movie.id}
+                                    src={`
+                            ${base_url}${movie.backdrop_path}
+                            `} alt={movie.name} />
+                                {/* <Hoverdesc className='hoverdesc'>
+                                    <p>{ truncate(movie.overview, 100) }</p>
+                                </Hoverdesc> */}
+                                
+                            </ImageBox>
                             <p>{movie.title ? movie.title : movie.name}</p>
                         </Holder>
                     )
@@ -64,9 +76,11 @@ const RowPoster = styled.div`
         rgb(0 0 0 / 73%) 0px 16px 10px -10px;
         transition: transform 450ms;
         cursor: pointer;
+        z-index: 1;
         &:hover{
-            transform: scale(1.2);
+            transform: scale(1.06);
             opacity: 1;
+            z-index: 10;
         }
     }
 
@@ -79,4 +93,36 @@ const Holder = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    
+    p{
+        margin-top: 10px;   
+        font-weight: 500;
+        font-size: 15px;
+        letter-spacing: 1.2px;
+    }
+    `
+
+const ImageBox = styled.div`
+    position: relative;
+
+    &:hover{
+        .hoverdesc{
+            display: block;
+        }
+    }
+`
+const Hoverdesc = styled.div`
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+    background-color: rgba(0 , 0, 0, 0.5);
+    
+    p{
+        font-size: 10px;
+        text-align: left;
+        color: white;
+        cursor: pointer;
+    }
 `
